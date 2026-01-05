@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Ship Diagnostic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F2F7FF;
+            color: #212d40;
+            overflow-x: hidden;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        /* Ambient Space Background */
+        .space-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(72, 107, 245, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(72, 107, 245, 0.08) 0%, transparent 50%),
+                linear-gradient(135deg, #F2F7FF 0%, #e8f0ff 100%);
+            overflow: hidden;
+        }
+
+        /* Star Field Generation */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: #486BF5;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: twinkle var(--duration) ease-in-out infinite;
+        }
+
+        /* Subtle Geometric Constellations */
+        .constellation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, #486BF5 1px, transparent 1px);
+            background-size: 100px 100px;
+            opacity: 0.03;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .floating {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        /* Glassmorphism adjustment for the main ship */
+        .ship-card {
+            box-shadow: 0 25px 50px -12px rgba(72, 107, 245, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        /* Orbit decoration */
+        .orbit {
+            position: absolute;
+            border: 1px dashed rgba(72, 107, 245, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@^19.2.3",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+        "react/": "https://esm.sh/react@^19.2.3/"
+      }
+    }
+    </script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div class="space-container">
+        <div class="constellation"></div>
+        <div class="stars" id="star-field"></div>
+        <div class="orbit" style="width: 600px; height: 600px; top: -100px; right: -100px;"></div>
+        <div class="orbit" style="width: 400px; height: 400px; bottom: -50px; left: -100px;"></div>
+    </div>
+    <div id="root"></div>
+
+    <script>
+        // Generate dynamic stars
+        const starField = document.getElementById('star-field');
+        const starCount = 60;
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 3 + 1;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+            star.style.animationDelay = Math.random() * 5 + 's';
+            starField.appendChild(star);
+        }
+    </script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
